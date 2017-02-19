@@ -41,7 +41,7 @@ const initialState = fromJS({
   HomeTab: {
     index: 0,
     routes: [
-      {key: 'HomeTab_Index', title: 'Core Up'}
+      {key: 'Counter', title: 'Counter'}
     ]
   },
   // Scenes for the `ProfileTab` tab.
@@ -51,7 +51,7 @@ const initialState = fromJS({
   }
 });
 
-export default function NavigationReducer(state = initialState, action) {
+export default function navigationReducer(state = initialState, action) {
   switch (action.type) {
     case PUSH_ROUTE: {
       // Push a route into the scenes stack.

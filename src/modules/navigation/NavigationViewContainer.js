@@ -3,8 +3,8 @@ import {pushRoute, popRoute, switchTab, navigationCompleted} from './NavigationS
 import NavigationView from './NavigationView';
 
 export default connect(
-  state => ({
-    navigationState: state.get('navigationState').toJS()
+  ({navigationState}) => ({
+    navigationState: navigationState.toJS()
   }),
   dispatch => ({
     switchTab(index) {

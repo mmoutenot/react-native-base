@@ -1,19 +1,17 @@
 import {applyMiddleware, createStore, compose} from 'redux';
-import * as reduxLoop from 'redux-loop';
 
-import middleware from './middleware';
+import saga from './saga';
+import middleware, {runSaga} from './middleware';
 import reducer from './reducer';
 
-const enhancer = compose(
+
+const createStoreWithMiddleware = compose(
   applyMiddleware(...middleware),
-  reduxLoop.install()
-);
+)(createStore);
 
 // create the store
-const store = createStore(
-  reducer,
-  null,
-  enhancer
-);
+const store = createStoreWithMiddleware(reducer);
+
+runSaga(saga);
 
 export default store;

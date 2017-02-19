@@ -2,7 +2,8 @@
 
 import React from 'react';
 
-import HomeView from './home/HomeView';
+import CounterViewContainer from './counter/CounterViewContainer';
+import ColorViewContainer from './colors/ColorViewContainer';
 
 
 /**
@@ -11,14 +12,17 @@ import HomeView from './home/HomeView';
 export default function AppRouter(props) {
   const key = props.scene.route.key;
 
-  switch (key) {
-    case 'HomeTab_Index': {
-      return <HomeView />;
-    }
-    case 'Counter': {
-      return <HomeView />;
-    }
+  if (key === 'Counter') {
+    return <CounterViewContainer />;
+  }
 
+  if (key.indexOf('Color') === 0) {
+    const index = props.scenes.indexOf(props.scene);
+    return (
+      <ColorViewContainer
+        index={index}
+      />
+    );
   }
 
   throw new Error('Unknown navigation key: ' + key);

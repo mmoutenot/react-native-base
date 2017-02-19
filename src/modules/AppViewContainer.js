@@ -2,7 +2,7 @@ import {connect} from 'react-redux';
 import AppView from './AppView';
 
 export default connect(
-  state => ({
-    isReady: state.getIn(['session', 'isReady'])
+  ({session}) => ({
+    isReady: session.get('isReady')
   })
 )(AppView);

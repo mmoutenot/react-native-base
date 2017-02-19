@@ -1,11 +1,16 @@
+import createSagaMiddleware from 'redux-saga'
 
-import promiseMiddleware from 'redux-promise';
-import thunkMiddleware from 'redux-thunk';
 import loggerMiddleware from './middleware/loggerMiddleware';
+
+
+const sagaMiddleware = createSagaMiddleware();
 
 // define store middlewares as an array
 export default [
-  promiseMiddleware,
-  thunkMiddleware,
-  loggerMiddleware
+  sagaMiddleware,
+  loggerMiddleware,
 ];
+
+export function runSaga (saga) {
+  sagaMiddleware.run(saga);
+}

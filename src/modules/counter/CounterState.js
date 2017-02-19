@@ -1,6 +1,9 @@
 import {Map} from 'immutable';
-import {loop, Effects} from 'redux-loop';
+import {takeEvery, takeLatest} from 'redux-saga'
+import {call, put, select} from 'redux-saga/effects'
+
 import {generateRandomNumber} from '../../services/randomNumberService';
+
 
 // Initial state
 const initialState = Map({
@@ -29,15 +32,17 @@ export function random() {
   };
 }
 
-export async function requestRandomNumber() {
-  return {
+export function* onRequestRandom() {
+  debugger;
+  const randomNumber = yield call(generateRandomNumber);
+  yield put({
     type: RANDOM_RESPONSE,
-    payload: await generateRandomNumber()
-  };
+    payload: randomNumber,
+  });
 }
 
 // Reducer
-export default function CounterStateReducer(state = initialState, action = {}) {
+export default function counterStateReducer(state = initialState, action = {}) {
   switch (action.type) {
     case INCREMENT:
       return state.update('value', value => value + 1);
@@ -46,10 +51,7 @@ export default function CounterStateReducer(state = initialState, action = {}) {
       return initialState;
 
     case RANDOM_REQUEST:
-      return loop(
-        state.set('loading', true),
-        Effects.promise(requestRandomNumber)
-      );
+      return state.set('loading', true);
 
     case RANDOM_RESPONSE:
       return state
@@ -59,4 +61,11 @@ export default function CounterStateReducer(state = initialState, action = {}) {
     default:
       return state;
   }
+}
+
+// Saga
+export function* counterSaga () {
+  yield [
+    takeLatest(RANDOM_REQUEST, onRequestRandom),
+  ]
 }

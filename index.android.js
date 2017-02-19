@@ -12,7 +12,7 @@ const CoreUp = React.createClass({
   },
 
   navigateBack() {
-    const navigationState = store.getState().get('navigationState');
+    const {navigationState} = store.getState();
     const tabs = navigationState.get('tabs');
     const tabKey = tabs.getIn(['routes', tabs.get('index')]).get('key');
     const currentTab = navigationState.get(tabKey);

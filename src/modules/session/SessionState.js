@@ -19,7 +19,7 @@ export function initializeSessionState() {
 }
 
 // Reducer
-export default function SessionStateReducer(state = initialState, action = {}) {
+export default function sessionStateReducer(state = initialState, action = {}) {
   switch (action.type) {
     case INITIALIZE_STATE:
     case RESET_STATE:

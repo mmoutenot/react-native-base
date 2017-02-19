@@ -34,7 +34,6 @@ const ColorView = React.createClass({
   },
 
   render() {
-
     const index = this.props.index;
     const text = `View #${index}`;
     return (

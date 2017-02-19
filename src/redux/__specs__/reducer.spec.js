@@ -15,6 +15,9 @@ describe('reducer', () => {
 
       expect(initialState.getIn(['counter', 'value'])).toBe(0);
       expect(nextState.getIn(['counter', 'value'])).toBe(9);
+
+      expect(initialState.getIn(['session', 'isReady'])).toBe(false);
+      expect(nextState.getIn(['session', 'isReady'])).toBe(true);
     });
   });
 });
